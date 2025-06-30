@@ -317,7 +317,7 @@ export default {
       if (userState.is_blocked) {
         await sendMessageToUser(chatId, `⛔️ *消息已被拒收*\n\n` +
           `很抱歉 由于您的不当行为\n` +
-          `凉心已将您关入小黑屋\n` +
+          `🆂🄴❼🄴🅽已将您关入小黑屋\n` +
           `暂时无法继续对话\n\n` +
           `TAT`);
         return;
@@ -416,7 +416,7 @@ export default {
         }
 
         const successMessage = await getVerificationSuccessMessage();
-        await sendMessageToUser(chatId, `👋 *欢迎使用凉心的传话筒*\n\n` +
+        await sendMessageToUser(chatId, `👋 *欢迎使用🆂🄴❼🄴🅽的传话筒*\n\n` +
               `📝 请使用礼貌用语进行对话\n` +
               `⏱ 管理员看到消息会及时回复\n\n` +
               `*温馨提示：请保持耐心，避免重复发送相同消息*`);
@@ -599,14 +599,14 @@ export default {
       const userRawEnabled = (await getSetting('user_raw_enabled', env.D1)) === 'true';
       if (!userRawEnabled) return '验证成功！您现在可以与我聊天。';
 
-      const response = await fetch('https://raw.githubusercontent.com/52Lxcloud/TGChatBot/refs/heads/master/CFTeleTrans/start.md');
+      const response = await fetch('https://raw.githubusercontent.com/se7enbot/TGChatBot/refs/heads/master/CFTeleTrans/start.md');
       if (!response.ok) return '验证成功！您现在可以与我聊天。';
       const message = await response.text();
       return message.trim() || '验证成功！您现在可以与我聊天。';
     }
 
     async function getNotificationContent() {
-      const response = await fetch('https://raw.githubusercontent.com/52Lxcloud/TGChatBot/refs/heads/master/CFTeleTrans/notification.md');
+      const response = await fetch('https://raw.githubusercontent.com/se7enbot/TGChatBot/refs/heads/master/CFTeleTrans/notification.md');
       if (!response.ok) return '';
       const content = await response.text();
       return content.trim() || '';
@@ -830,7 +830,7 @@ export default {
             .run();
 
           const successMessage = await getVerificationSuccessMessage();
-          await sendMessageToUser(chatId, `${successMessage}\n恭喜您通过了验证！现在可以和凉心聊天啦～`);
+          await sendMessageToUser(chatId, `${successMessage}\n恭喜您通过了验证！现在可以和🆂🄴❼🄴🅽聊天啦～`);
           const userInfo = await getUserInfo(chatId);
           await ensureUserTopic(chatId, userInfo);
         } else {
@@ -867,7 +867,7 @@ export default {
           await env.D1.prepare('INSERT OR REPLACE INTO user_states (chat_id, is_blocked) VALUES (?, ?)')
             .bind(privateChatId, true)
             .run();
-          await sendMessageToTopic(topicId, `✅ *操作成功*\n\`${privateChatId}\` 已被凉心关入小黑屋\n消息将不再转发`);
+          await sendMessageToTopic(topicId, `✅ *操作成功*\n\`${privateChatId}\` 已被🆂🄴❼🄴🅽关入小黑屋\n消息将不再转发`);
         } else if (action === 'unblock') {
           let state = userStateCache.get(privateChatId);
           if (state === undefined) {
@@ -881,7 +881,7 @@ export default {
           await env.D1.prepare('INSERT OR REPLACE INTO user_states (chat_id, is_blocked, is_first_verification) VALUES (?, ?, ?)')
             .bind(privateChatId, false, true)
             .run();
-          await sendMessageToTopic(topicId, `✅ *操作成功*\n凉心把 \`${privateChatId}\` 从小黑屋中放了出来\n消息将继续转发`);
+          await sendMessageToTopic(topicId, `✅ *操作成功*\n🆂🄴❼🄴🅽把 \`${privateChatId}\` 从小黑屋中放了出来\n消息将继续转发`);
         } else if (action === 'toggle_verification') {
           const currentState = (await getSetting('verification_enabled', env.D1)) === 'true';
           const newState = !currentState;
